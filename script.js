@@ -1,6 +1,14 @@
-const symbols = ["🍎","🍌","🍇","🍓","🍒","🥝"];
-let cards = [...symbols, ...symbols];
-cards.sort(() => Math.random() - 0.5);
+const images = [
+  "images/img1.jpg",
+  "images/img2.jpg",
+  "images/img3.jpg",
+  "images/img4.jpg",
+  "images/img5.jpg",
+  "images/img6.jpg"
+];
+
+let cardsData = [...images, ...images];
+cardsData.sort(() => Math.random() - 0.5);
 
 const game = document.getElementById("game");
 const win = document.getElementById("win");
@@ -9,38 +17,43 @@ let firstCard = null;
 let lock = false;
 let matched = 0;
 
-cards.forEach(symbol => {
+cardsData.forEach(img => {
   const card = document.createElement("div");
   card.className = "card";
-  card.textContent = "❓";
+  card.dataset.image = img;
+
+  card.innerHTML = `
+    <div class="card-inner">
+      <div class="card-front">❓</div>
+      <div class="card-back">
+        <img src="${img}">
+      </div>
+    </div>
+  `;
 
   card.onclick = () => {
     if (lock || card.classList.contains("open")) return;
 
     card.classList.add("open");
-    card.textContent = symbol;
 
     if (!firstCard) {
       firstCard = card;
     } else {
       lock = true;
-      if (firstCard.textContent === card.textContent) {
-        firstCard.classList.add("matched");
-        card.classList.add("matched");
+
+      if (firstCard.dataset.image === card.dataset.image) {
         matched += 2;
         reset();
 
-        if (matched === cards.length) {
+        if (matched === cardsData.length) {
           win.style.display = "block";
         }
       } else {
         setTimeout(() => {
           firstCard.classList.remove("open");
           card.classList.remove("open");
-          firstCard.textContent = "❓";
-          card.textContent = "❓";
           reset();
-        }, 800);
+        }, 900);
       }
     }
   };

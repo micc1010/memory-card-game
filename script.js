@@ -46,7 +46,9 @@ cardsData.forEach(img => {
         reset();
 
         if (matched === cardsData.length) {
-          win.style.display = "block";
+          setTimeout(() => {
+            window.location.href = "result.html";
+          }, 800);
         }
       } else {
         setTimeout(() => {

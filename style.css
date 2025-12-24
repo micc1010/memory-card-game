@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+}
+
+.game {
+  display: grid;
+  grid-template-columns: repeat(4, 90px);
+  gap: 12px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.card {
+  width: 90px;
+  height: 90px;
+  background: #1e293b;
+  font-size: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.card.open {
+  background: #38bdf8;
+}
+
+.card.matched {
+  background: #22c55e;
+  cursor: default;
+}
+
+#win {
+  display: none;
+  margin-top: 30px;
+}
+
+#win img {
+  width: 220px;
+  border-radius: 10px;
+}
